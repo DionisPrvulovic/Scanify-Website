@@ -1,0 +1,60 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: #c9d1d9;
+    background-color: #0d1117;
+}
+
+.container {
+    width: 95%;
+    max-width: 960px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 6px;
+    background-color: #161b22;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);
+    border: 1px solid #30363d;
+}
+
+h1 {
+    color: #e8edf2;
+}
+
+#qr-input {
+    width: 100%;
+    padding: 12px 16px;
+    margin: 8px 0 16px;
+    box-sizing: border-box;
+    border-radius: 6px;
+    background-color: #0d1117;
+    color: #c9d1d9;
+    border: 1px solid #30363d;
+    outline: none;
+    transition: border-color 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+
+#qr-input:focus {
+    border-color: #2042b7;
+    box-shadow: inset 0 0 0 1px #2042b7; /* Adjusted to a thin inset shadow for a solid color look */
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #30363d;
+    background-color: #238636;
+    color: white;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #2ea043;
+}
+
+#qr-result {
+    margin-top: 20px;
+}
