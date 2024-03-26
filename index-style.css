@@ -96,3 +96,36 @@ button {
     width: 100%; /* Match width of input fields */
     display: none; /* Hidden by default */
 }
+
+
+
+@media (max-width: 768px) {
+    .container {
+        width: 98%; /* Allow the container to fill more of the screen */
+        max-width: none; /* Remove the max-width restriction */
+        padding: 10px; /* Reduce padding to save space */
+        margin: 10px auto; /* Adjust margin for a tighter fit */
+        border-radius: 4px; /* Optional: Adjust border-radius for design consistency */
+    }
+
+    #qr-type, .input-field, #qr-input {
+        margin-bottom: 12px; /* Reduce margin-bottom on smaller screens */
+        padding: 8px 12px; /* Adjust padding for a better fit */
+    }
+
+    button {
+        padding: 8px 10px; /* Adjust button padding */
+        font-size: 14px; /* Adjust font size for better readability */
+        margin-bottom: 12px; /* Adjust margin-bottom */
+    }
+
+    h1 {
+        font-size: 20px; /* Reduce font size of the heading */
+        margin-top: 10px; /* Adjust top margin for the heading */
+    }
+
+    /* Additional styles to prevent horizontal scrolling */
+    body, html {
+        overflow-x: hidden; /* Prevent horizontal scrolling */
+    }
+}
