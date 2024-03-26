@@ -9,8 +9,19 @@
 <body>
     <div class="container">
         <h1>QR-Code-Generator</h1>
-        <input type="text" id="qr-input" placeholder="Text eingeben">
-        <button onclick="generateQRCode()">QR-Code generieren</button>
+        <select id="qr-type" onchange="toggleInputFields()">
+            <option value="url">URL</option>
+            <option value="wifi">WiFi</option>
+        </select>
+        <input type="text" id="qr-input" placeholder="URL eingeben" class="input-field">
+        <div id="wifi-fields" style="display:none;">
+            <input type="text" id="wifi-name" placeholder="WiFi-Name" class="input-field">
+            <input type="text" id="wifi-password" placeholder="WiFi-Passwort" class="input-field">
+        </div>
+        <div class="buttons-container">
+            <button id="generate-btn" onclick="generateQRCode()">QR-Code generieren</button>
+            <button id="delete-btn" onclick="deleteQRCode()">Löschen</button>
+        </div>
         <div id="qr-result"></div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>

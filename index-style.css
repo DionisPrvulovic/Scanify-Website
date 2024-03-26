@@ -15,16 +15,32 @@ body, html {
     background-color: #161b22;
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);
     border: 1px solid #30363d;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 h1 {
     color: #e8edf2;
 }
 
-#qr-input {
+#qr-type {
     width: 100%;
     padding: 12px 16px;
-    margin: 8px 0 16px;
+    margin-bottom: 60px; /* Increased margin for space between dropdown and input fields */
+    box-sizing: border-box;
+    border-radius: 6px;
+    background-color: #0d1117;
+    color: #c9d1d9;
+    border: 1px solid #30363d;
+    outline: none;
+    transition: border-color 0.3s ease-out;
+}
+
+.input-field, #qr-input {
+    width: 100%;
+    padding: 12px 16px;
+    margin-bottom: 16px;
     box-sizing: border-box;
     border-radius: 6px;
     background-color: #0d1117;
@@ -34,27 +50,49 @@ h1 {
     transition: border-color 0.3s ease-out, box-shadow 0.3s ease-out;
 }
 
-#qr-input:focus {
+.input-field:focus, #qr-input:focus, #qr-type:focus {
     border-color: #2042b7;
-    box-shadow: inset 0 0 0 1px #2042b7; /* Adjusted to a thin inset shadow for a solid color look */
+    box-shadow: inset 0 0 0 1px #2042b7;
+}
+
+/* Styling for the Generate button */
+#generate-btn {
+    background-color: #238636; /* Green background */
+    color: white;
+    border: 1px solid #30363d;
+}
+
+#generate-btn:hover {
+    background-color: #2ea043;
+}
+
+/* Styling for the Delete button */
+#delete-btn {
+    background-color: #dc3545; /* Red background */
+    color: white;
+    border: 1px solid #30363d;
+}
+
+#delete-btn:hover {
+    background-color: #c82333;
 }
 
 button {
     padding: 10px 20px;
     font-size: 16px;
     border-radius: 6px;
-    border: 1px solid #30363d;
-    background-color: #238636;
-    color: white;
     cursor: pointer;
-    margin-top: 8px;
     transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #2ea043;
+    align-self: stretch; /* Match width of input fields */
+    margin-bottom: 20px; /* Fixed margin */
 }
 
 #qr-result {
     margin-top: 20px;
+    align-self: center; /* Center the QR code */
+}
+
+#wifi-fields {
+    width: 100%; /* Match width of input fields */
+    display: none; /* Hidden by default */
 }
