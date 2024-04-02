@@ -1,8 +1,8 @@
-function toggleInputFields() {
-    const qrType = document.getElementById('qr-type').value;
+// Toggle WiFi fields and URL input based on dropdown selection
+function toggleInputFields(value) {
     const wifiFields = document.getElementById('wifi-fields');
     const qrInput = document.getElementById('qr-input');
-    if (qrType === 'wifi') {
+    if (value === 'wifi') {
         wifiFields.style.display = 'block';
         qrInput.style.display = 'none';
     } else {
@@ -11,8 +11,39 @@ function toggleInputFields() {
     }
 }
 
+// Handle custom dropdown functionality
+document.getElementById('dropdown-selected').addEventListener('click', function() {
+    const options = document.getElementById('dropdown-options');
+    options.style.display = options.style.display === 'none' ? 'block' : 'none';
+});
+
+// Listen for option selection in the dropdown
+document.querySelectorAll('.dropdown-option').forEach(item => {
+    item.addEventListener('click', function() {
+        const value = this.getAttribute('data-value');
+        document.getElementById('dropdown-selected').textContent = this.textContent;
+        const options = document.getElementById('dropdown-options');
+        options.style.display = 'none';
+        toggleInputFields(value);
+    });
+});
+
+// Toggle visibility of the password field
+document.getElementById('toggle-password').addEventListener('click', function() {
+    const passwordInput = document.getElementById('wifi-password');
+    const icon = document.getElementById('toggle-password').querySelector('ion-icon');
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        icon.setAttribute('name', 'eye-off');
+    } else {
+        passwordInput.type = 'password';
+        icon.setAttribute('name', 'eye');
+    }
+});
+
+// Generate QR Code based on the selected type and input
 function generateQRCode() {
-    const qrType = document.getElementById('qr-type').value;
+    const qrType = document.getElementById('dropdown-selected').textContent.toLowerCase();
     let qrInput;
     let qrContainer = document.getElementById('qr-result');
     qrContainer.innerHTML = '';
@@ -33,7 +64,6 @@ function generateQRCode() {
         qrInput = formatWifiString(name, password);
     }
 
-    // If there's input, proceed with QR code generation
     let qrOptions = {
         text: qrInput,
         width: 256,
@@ -47,10 +77,12 @@ function generateQRCode() {
     applyContainerStyles(qrContainer);
 }
 
+// Format the WiFi string for QR Code generation
 function formatWifiString(name, password) {
     return `WIFI:S:${name};T:WPA;P:${password};;`;
 }
 
+// Apply styles to the QR Code container
 function applyContainerStyles(container) {
     container.style.border = "1.5px solid #30363d";
     container.style.borderRadius = "6px";
@@ -59,11 +91,12 @@ function applyContainerStyles(container) {
     container.style.backgroundColor = "#0e1116";
 }
 
+// Delete the QR Code
 function deleteQRCode() {
     let qrContainer = document.getElementById('qr-result');
-    qrContainer.innerHTML = ''; // Clear the QR Code
+    qrContainer.innerHTML = '';
 
-    // Additionally, reset styles to "remove" the container visually
+    // Reset styles to visually "remove" the container
     qrContainer.style.border = "none";
     qrContainer.style.padding = "0";
     qrContainer.style.backgroundColor = "transparent";

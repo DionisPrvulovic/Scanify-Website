@@ -6,17 +6,27 @@
     <title>QR Code Generator</title>
     <link rel="stylesheet" href="index-style.css">
 </head>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <body>
     <div class="container">
         <h1>QR-Code-Generator</h1>
-        <select id="qr-type" onchange="toggleInputFields()">
-            <option value="url">URL</option>
-            <option value="wifi">WiFi</option>
-        </select>
+        <div id="custom-dropdown" class="custom-dropdown">
+            <div id="dropdown-selected" class="dropdown-selected">URL</div>
+            <div id="dropdown-options" class="dropdown-options" style="display: none;">
+                <div class="dropdown-option" data-value="url">URL</div>
+                <div class="dropdown-option" data-value="wifi">WiFi</div>
+            </div>
+        </div>
         <input type="text" id="qr-input" placeholder="URL eingeben" class="input-field">
         <div id="wifi-fields" style="display:none;">
             <input type="text" id="wifi-name" placeholder="WiFi-Name" class="input-field">
-            <input type="text" id="wifi-password" placeholder="WiFi-Passwort" class="input-field">
+            <div class="input-field-with-icon">
+                <input type="password" id="wifi-password" placeholder="WiFi-Passwort" class="input-field password-input">
+                <button id="toggle-password" class="icon-toggle">
+                    <ion-icon name="eye"></ion-icon>
+                </button>
+            </div>
         </div>
         <div class="buttons-container">
             <button id="generate-btn" onclick="generateQRCode()">QR-Code generieren</button>

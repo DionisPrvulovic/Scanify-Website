@@ -24,24 +24,64 @@ h1 {
     color: #e8edf2;
 }
 
-#qr-type {
+.custom-dropdown {
     width: 100%;
+    margin-bottom: 60px;
+    position: relative;
+}
+
+.dropdown-selected {
     padding: 12px 16px;
-    margin-bottom: 60px; /* Increased margin for space between dropdown and input fields */
-    box-sizing: border-box;
-    border-radius: 6px;
     background-color: #0d1117;
     color: #c9d1d9;
     border: 1px solid #30363d;
-    outline: none;
-    transition: border-color 0.3s ease-out;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+}
+
+.dropdown-options {
+    position: absolute;
+    top: calc(100% - 2px);
+    left: 0;
+    right: 0;
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    border-top: none;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+    display: none;
+    border-radius: 0 0 6px 6px;
+}
+
+.dropdown-option:first-child {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+.custom-dropdown.active .dropdown-selected {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.dropdown-option {
+    padding: 12px 16px;
+    color: #c9d1d9;
+    cursor: pointer;
+    border: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.dropdown-option:hover {
+    background-color: #30363d;
 }
 
 .input-field, #qr-input {
-    width: 100%;
+    width: calc(100% - 32px); /* Adjusted width to accommodate the icon */
     padding: 12px 16px;
     margin-bottom: 16px;
-    box-sizing: border-box;
     border-radius: 6px;
     background-color: #0d1117;
     color: #c9d1d9;
@@ -50,31 +90,41 @@ h1 {
     transition: border-color 0.3s ease-out, box-shadow 0.3s ease-out;
 }
 
-.input-field:focus, #qr-input:focus, #qr-type:focus {
+.input-field:focus, #qr-input:focus {
     border-color: #2042b7;
     box-shadow: inset 0 0 0 1px #2042b7;
 }
 
-/* Styling for the Generate button */
-#generate-btn {
-    background-color: #238636; /* Green background */
-    color: white;
-    border: 1px solid #30363d;
+.buttons-container {
+    display: flex;
+    width: 100%; /* Fill the width of its parent container */
+    margin-bottom: 20px; /* Space below the button container */
 }
 
-#generate-btn:hover {
-    background-color: #2ea043;
-}
-
-/* Styling for the Delete button */
+#generate-btn,
 #delete-btn {
-    background-color: #dc3545; /* Red background */
-    color: white;
+    flex: 1 0 calc(50% - 5px); /* Take up half the container minus half the space between buttons */
+    padding: 12px 16px; /* Padding for visual size */
+    margin-right: 10px; /* Margin between the buttons */
+    background-color: #0d1117;
+    color: #c9d1d9;
     border: 1px solid #30363d;
+    box-sizing: border-box; /* Border and padding included in the width */
+    text-align: center; /* Center the text inside buttons */
 }
 
+#delete-btn {
+    margin-right: 0; /* The second button doesn't need a margin on the right */
+}
+
+/* Ensure buttons don't have a margin at the end that would push them out of alignment */
+.buttons-container :last-child {
+    margin-right: 0;
+}
+
+#generate-btn:hover,
 #delete-btn:hover {
-    background-color: #c82333;
+    background-color: #161b22; /* Change background color on hover */
 }
 
 button {
@@ -82,50 +132,45 @@ button {
     font-size: 16px;
     border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    align-self: stretch; /* Match width of input fields */
-    margin-bottom: 20px; /* Fixed margin */
+    align-self: stretch;
 }
 
 #qr-result {
     margin-top: 20px;
-    align-self: center; /* Center the QR code */
+    align-self: center;
 }
 
 #wifi-fields {
-    width: 100%; /* Match width of input fields */
-    display: none; /* Hidden by default */
+    width: 100%;
+    display: none;
 }
 
+.input-field-with-icon {
+    position: relative;
+    display: flex; /* Add display flex to align items */
+    align-items: center; /* Center align items vertically */
+}
 
+.input-field-with-icon input {
+    width: calc(100% - 40px); /* Adjusted width to accommodate the icon */
+    padding-right: 40px; /* Adjusted padding to accommodate the icon */
+}
 
-@media (max-width: 768px) {
-    .container {
-        width: 98%; /* Allow the container to fill more of the screen */
-        max-width: none; /* Remove the max-width restriction */
-        padding: 10px; /* Reduce padding to save space */
-        margin: 10px auto; /* Adjust margin for a tighter fit */
-        border-radius: 4px; /* Optional: Adjust border-radius for design consistency */
-    }
+.icon-toggle {
+    position: absolute;
+    right: -40px; /* Position the icon with padding from the right side of the input bar */
+    top: 35%;
+    cursor: pointer;
+    font-size: 1.5em; /* Adjusted icon size */
+    color: #c9d1d9; /* Set default color */
+    width: 70px; /* Set width equal to font-size */
+    height: 42.5px; /* Set height equal to font-size */
+    background-color: transparent; /* Set background color to transparent */
+    transform: translate(-50%, -50%); /* Center the icon */
+    border: none; /* Remove border */
+    border-radius: 0; /* Remove border-radius */
+}
 
-    #qr-type, .input-field, #qr-input {
-        margin-bottom: 12px; /* Reduce margin-bottom on smaller screens */
-        padding: 8px 12px; /* Adjust padding for a better fit */
-    }
-
-    button {
-        padding: 8px 10px; /* Adjust button padding */
-        font-size: 14px; /* Adjust font size for better readability */
-        margin-bottom: 12px; /* Adjust margin-bottom */
-    }
-
-    h1 {
-        font-size: 20px; /* Reduce font size of the heading */
-        margin-top: 10px; /* Adjust top margin for the heading */
-    }
-
-    /* Additional styles to prevent horizontal scrolling */
-    body, html {
-        overflow-x: hidden; /* Prevent horizontal scrolling */
-    }
+.icon-toggle:hover {
+    color: #58a6ff; /* Change color on hover */
 }
