@@ -1,6 +1,8 @@
 body, html {
     height: 100%;
     margin: 0;
+    max-width: 100%;
+    overflow-x: hidden;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
     color: #c9d1d9;
     background-color: #0d1117;
@@ -18,6 +20,7 @@ body, html {
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-sizing: border-box; /* Make sure padding doesn't add to the width */
 }
 
 h1 {
@@ -74,11 +77,23 @@ h1 {
     box-sizing: border-box;
 }
 
+.dropdown-option:first-child:hover {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.dropdown-option:last-child:hover {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
 .dropdown-option:hover {
     background-color: #30363d;
+    border-radius: 0; /* Reset border-radius for all options */
 }
 
 .input-field, #qr-input {
+    font-size: 16px; /* Increase font size to prevent zooming on mobile devices */
     width: calc(100% - 32px); /* Adjusted width to accommodate the icon */
     padding: 12px 16px;
     margin-bottom: 16px;
@@ -101,8 +116,7 @@ h1 {
     margin-bottom: 20px; /* Space below the button container */
 }
 
-#generate-btn,
-#delete-btn {
+#generate-btn, #delete-btn {
     flex: 1 0 calc(50% - 5px); /* Take up half the container minus half the space between buttons */
     padding: 12px 16px; /* Padding for visual size */
     margin-right: 10px; /* Margin between the buttons */
@@ -122,14 +136,13 @@ h1 {
     margin-right: 0;
 }
 
-#generate-btn:hover,
-#delete-btn:hover {
+#generate-btn:hover, #delete-btn:hover {
     background-color: #161b22; /* Change background color on hover */
 }
 
 button {
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 16px; /* Match font size to prevent zooming on mobile devices */
     border-radius: 6px;
     cursor: pointer;
     align-self: stretch;
@@ -147,30 +160,65 @@ button {
 
 .input-field-with-icon {
     position: relative;
-    display: flex; /* Add display flex to align items */
-    align-items: center; /* Center align items vertically */
+    display: flex;
+    align-items: center;
+    width: 100%; /* ensure full width */
 }
 
 .input-field-with-icon input {
-    width: calc(100% - 40px); /* Adjusted width to accommodate the icon */
-    padding-right: 40px; /* Adjusted padding to accommodate the icon */
+    flex-grow: 1; /* Allow input to fill space, accounting for icon */
+    padding: 12px 16px 12px 16px; /* Adjust padding to not overlap the icon */
 }
 
 .icon-toggle {
     position: absolute;
-    right: -40px; /* Position the icon with padding from the right side of the input bar */
-    top: 35%;
-    cursor: pointer;
+    right: 16px; /* Align with the right padding of the input */
+    top: 40%;
+    color: #c9d1d9;
     font-size: 1.5em; /* Adjusted icon size */
-    color: #c9d1d9; /* Set default color */
-    width: 70px; /* Set width equal to font-size */
-    height: 42.5px; /* Set height equal to font-size */
-    background-color: transparent; /* Set background color to transparent */
-    transform: translate(-50%, -50%); /* Center the icon */
+    transform: translateY(-50%); /* Center vertically */
+    background: none; /* Remove any background */
     border: none; /* Remove border */
-    border-radius: 0; /* Remove border-radius */
+    padding: 0; /* Remove padding */
+    cursor: pointer;
 }
 
 .icon-toggle:hover {
     color: #58a6ff; /* Change color on hover */
+}
+
+@media (max-width: 768px) {
+    .input-field-with-icon {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .input-field-with-icon input {
+        padding-right: 46px;
+        flex-grow: 1; /* input field will fill the width of the container */
+        padding-right: 2.5em; /* make room for the icon */
+    }
+
+    .icon-toggle {
+        position: absolute;
+        right: 10px; /* right aligned within the .input-field-with-icon container */
+        top: 40%;
+        transform: translateY(-50%); /* vertically center the icon */
+    }
+}
+
+/* Add more breakpoints for larger screens if necessary */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        max-width: 95%; /* A bit more width on mid-sized devices */
+        padding: 20px 10px; /* Adjust padding */
+    }
+}
+
+/* For very large screens, cap the max-width to ensure content doesn't stretch too far */
+@media (min-width: 1025px) {
+    .container {
+        max-width: 960px; /* Adjust this if needed */
+    }
 }

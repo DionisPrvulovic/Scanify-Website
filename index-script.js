@@ -12,9 +12,21 @@ function toggleInputFields(value) {
 }
 
 // Handle custom dropdown functionality
-document.getElementById('dropdown-selected').addEventListener('click', function() {
+const dropdown = document.getElementById('custom-dropdown');
+document.getElementById('dropdown-selected').addEventListener('click', function(event) {
+    event.stopPropagation(); // Prevent click from immediately propagating to document
     const options = document.getElementById('dropdown-options');
     options.style.display = options.style.display === 'none' ? 'block' : 'none';
+    dropdown.classList.toggle('active'); // Toggle active class
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(event) {
+    const options = document.getElementById('dropdown-options');
+    if (options.style.display === 'block') {
+        options.style.display = 'none';
+        dropdown.classList.remove('active');
+    }
 });
 
 // Listen for option selection in the dropdown
@@ -24,6 +36,7 @@ document.querySelectorAll('.dropdown-option').forEach(item => {
         document.getElementById('dropdown-selected').textContent = this.textContent;
         const options = document.getElementById('dropdown-options');
         options.style.display = 'none';
+        dropdown.classList.remove('active');
         toggleInputFields(value);
     });
 });
@@ -31,13 +44,13 @@ document.querySelectorAll('.dropdown-option').forEach(item => {
 // Toggle visibility of the password field
 document.getElementById('toggle-password').addEventListener('click', function() {
     const passwordInput = document.getElementById('wifi-password');
-    const icon = document.getElementById('toggle-password').querySelector('ion-icon');
+    const icon = this.querySelector('ion-icon');
     if (passwordInput.type === 'password') {
         passwordInput.type = 'text';
-        icon.setAttribute('name', 'eye-off');
+        icon.setAttribute('name', 'eye');
     } else {
         passwordInput.type = 'password';
-        icon.setAttribute('name', 'eye');
+        icon.setAttribute('name', 'eye-off');
     }
 });
 
